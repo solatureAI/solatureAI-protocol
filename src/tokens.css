@@ -1,0 +1,55 @@
+/* TOKENS — the only file in the project allowed to hold colour literals.
+   Provenance (sampled from brand/ and reference/ pixels, not invented):
+   --c-purple  #9434fa  modal opaque pixel of brand/LOGO SOLATURE PNG...png (#9534fa) and PNG.png (#9434f9);
+                        slide fields in reference/SOLATURE 1-6 are #9332fb, cover #923bfb
+   --c-ink     #121212  modal background pixel of brand/LOGO SOLATURE PNG.png and JPG (cover: #121413)
+   --c-black   #010101  modal glyph pixel of reference/SOLATURE 1-6 (#010101)
+   --c-green   #16f099  sampled at (100,65) of reference/SAMPUL SOLATURE JPG (#16f099)
+   --c-blue    #468bf2  sampled at (200,227) of reference/SAMPUL SOLATURE JPG (#468bf2)
+   Everything else is derived with color-mix() from these five. */
+:root {
+  --c-purple: #9434fa;
+  --c-ink: #121212;
+  --c-black: #010101;
+  --c-green: #16f099;
+  --c-blue: #468bf2;
+
+  --paper: color-mix(in srgb, var(--c-purple) 5%, white);
+  --paper-dim: color-mix(in srgb, var(--paper) 68%, transparent);
+  --paper-faint: color-mix(in srgb, var(--paper) 14%, transparent);
+  --surface-0: var(--c-ink);
+  --surface-1: color-mix(in srgb, var(--c-ink) 92%, var(--c-purple));
+  --surface-2: color-mix(in srgb, var(--c-ink) 84%, var(--c-purple));
+  --line: color-mix(in srgb, var(--paper) 13%, transparent);
+  --line-strong: color-mix(in srgb, var(--paper) 26%, transparent);
+  --purple-soft: color-mix(in srgb, var(--c-purple) 30%, transparent);
+  --purple-glow: color-mix(in srgb, var(--c-purple) 55%, transparent);
+
+  --color-accent: var(--c-green);
+  --color-up: var(--c-green);
+  --color-down: var(--c-blue);
+
+  /* geometry — reference radii: 0 / 4 / 8 */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+  /* spacing scale */
+  --s-4: 4px; --s-8: 8px; --s-12: 12px; --s-16: 16px; --s-24: 24px; --s-32: 32px; --s-48: 48px; --s-64: 64px; --s-96: 96px;
+  --section-gap: 120px;
+  --nav-h: 68px;
+  /* motion — reference: .12s / .16s / .36s, 45ms stagger, cubic-bezier(.2,.7,.2,1) */
+  --dur-instant: 120ms; --dur-2: 160ms; --dur-3: 240ms; --dur-dialog: 280ms; --dur-slow: 360ms; --dur-slower: 420ms; --stagger: 45ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --ease-step-snap: steps(2, end);
+  --ease-step-wipe: steps(4, end);
+  --ease-step-8bit: steps(6, end);
+  --loop: 3.2s;
+  --pass-ms: 40s;
+  --pass-steps: 600;
+
+  --font-display: "Anton", "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (max-width: 720px) { :root { --section-gap: 72px; --nav-h: 60px; } }

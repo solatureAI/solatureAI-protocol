@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solature — orbit Solana’s tape</title>
+<meta name="description" content="Live orbit around Solana markets: ten boosted tokens, a reserved first seat, and a contract line that stays truthful.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="preload" as="image" href="assets/solature-logo-512.png">
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="top" id="top-bar">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Solature home">
+      <img src="assets/solature-logo-128.png" width="40" height="40" alt="" class="brand-mark">
+      <span class="brand-word">SOLATURE</span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#board">Board</a><a href="#kit">Kit</a><a href="#check-sec">Check</a><a href="#notes">Notes</a>
+    </nav>
+    <div class="right">
+      <div class="pill" id="status" data-kind="sync" role="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Syncing</span></div>
+      <div class="socials">
+        <a class="social" data-social="x" aria-label="Solature on X" title="X">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="social" data-social="github" aria-label="GitHub not stated yet" title="GitHub">
+          <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <button class="ca" id="ca" type="button" aria-label="Contract address">
+    <span class="ca-label">CA</span>
+    <span class="ca-value" id="ca-value">Contract address not stated yet</span>
+    <span class="ca-hint" id="ca-hint">inert</span>
+  </button>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="mesh" aria-hidden="true" data-depth="0.25"></div>
+    <div class="blocks" aria-hidden="true" data-depth="0.6">
+      <i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="b b4"></i><i class="b b5"></i><i class="b b6"></i><i class="b b7"></i>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal data-reveal-index="0">Solana · mainnet</p>
+        <h1 id="hero-title" data-reveal data-reveal-index="1">Circle the tape.<br>Keep your orbit.</h1>
+        <p class="lede" data-reveal data-reveal-index="2">Ten of Solana’s loudest tokens get read every sixty seconds, while seat number one stays reserved for Solature itself. Claims appear only after they are recorded.</p>
+        <div class="cta" data-reveal data-reveal-index="3">
+          <a class="btn btn-ink" href="#board">See seats <span class="arr" aria-hidden="true">↓</span></a>
+          <a class="btn btn-line" href="#check-sec">Test address</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit-wrap" data-depth="0.9"><img class="orbit" src="assets/solature-logo-512.png" width="512" height="512" alt="" fetchpriority="high"></div>
+      </div>
+    </div>
+    <div class="pixel-floor" aria-hidden="true"></div>
+  </section>
+
+  <section class="sec dark" id="board" aria-labelledby="board-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="d-md" id="board-title" data-reveal>Market board</h2>
+        <p class="sub" data-reveal data-reveal-index="1">Seat one belongs to Solature. Seats beyond hold Solana tokens carrying the heaviest boosts, ranked by boost weight and refreshed each minute whenever you keep this tab visible.</p>
+      </div>
+      <p class="board-error" id="board-error" role="alert" hidden></p>
+      <div class="board" data-reveal>
+        <div class="row head" aria-hidden="true"><span>#</span><span>Token</span><span>Price</span><span>24h</span><span>Volume</span><span>Liquidity</span></div>
+        <div id="rows" aria-live="off"></div>
+        <div id="skeleton" aria-hidden="true">
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="row sk"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="kit" aria-labelledby="kit-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="d-md" id="kit-title" data-reveal>The kit</h2>
+        <p class="sub" data-reveal data-reveal-index="1">Compact modules. Every module owns one task and admits its blind spots.</p>
+      </div>
+      <div class="grid">
+        <article class="card" data-spot data-reveal><span class="n">01</span><h3>Ten-seat board</h3><p>Only Solana tokens qualify. Sorting follows boost weight; missing artwork becomes a letter tile.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="1"><span class="n">02</span><h3>Pinned first seat</h3><p>Held for Solature. Sits quiet, wearing our mark, until a contract line exists.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="2"><span class="n">03</span><h3>Twin reads</h3><p>Exchange pair numbers and launchpad numbers get requested simultaneously; neither request queues behind its sibling.</p></article>
+        <article class="card" data-spot data-reveal><span class="n">04</span><h3>Gate logic</h3><p>Each outside fact occupies exactly one record, tagged stated, absent, or unconfirmed.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="1"><span class="n">05</span><h3>Soft failure</h3><p>Feed stumbles trigger stretched retries while previous good numbers remain visible.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="2"><span class="n">06</span><h3>Tab manners</h3><p>Polling naps behind background tabs, then fetches instantly upon your return.</p></article>
+        <article class="card" data-spot data-reveal><span class="n">07</span><h3>Calm mode</h3><p>Visitors preferring stillness get every animation flattened into a static state.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="1"><span class="n">08</span><h3>Timeless</h3><p>Nothing printed anywhere here mentions calendar days or clock readings.</p></article>
+        <article class="card" data-spot data-reveal data-reveal-index="2"><span class="n">09</span><h3>Source code</h3><p>Our code icon remains dim until a genuine repository gets published.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dark ticker-sec" aria-label="Live ticker">
+    <div class="ticker" id="ticker" aria-hidden="true">
+      <div class="ticker-track" id="ticker-track">
+        <div class="tick-set"><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span><span class="tick sk-tick"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="check-sec" aria-labelledby="check-title">
+    <div class="wrap split">
+      <div>
+        <h2 class="d-md" id="check-title" data-reveal>Address check</h2>
+        <p class="sub" data-reveal data-reveal-index="1">Drop in any address. We compare it against our recorded facts without dismissing strings by shape alone.</p>
+      </div>
+      <form class="check" id="check" autocomplete="off" data-spot data-reveal>
+        <label for="check-input">Address</label>
+        <input id="check-input" name="address" type="text" inputmode="text" spellcheck="false" placeholder="Solana base58 or 0x…">
+        <p class="check-out" id="check-out" data-kind="empty" role="status"></p>
+        <button class="btn btn-ink" type="submit">Compare</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec dark" id="notes" aria-labelledby="notes-title">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="d-md" id="notes-title" data-reveal>Flight notes</h2></div>
+      <div class="notes">
+        <article class="note" data-spot data-reveal><span class="tag">Ring one</span><h3>Read</h3><p>Live board runs permanently, independent from contract status.</p></article>
+        <article class="note" data-spot data-reveal data-reveal-index="1"><span class="tag">Ring two</span><h3>Pin</h3><p>After a contract gets recorded, seat one wakes and pulls numbers for Solature.</p></article>
+        <article class="note" data-spot data-reveal data-reveal-index="2"><span class="tag">Ring three</span><h3>Open</h3><p>Code goes public after a repository appears; the dim icon then lights up.</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand"><img src="assets/solature-logo-128.png" width="48" height="48" alt=""><div><b>SOLATURE</b><span>solature.fun</span></div></div>
+    <nav class="foot-links" aria-label="Footer"><a href="#board">Board</a><a href="#kit">Kit</a><a href="#check-sec">Check</a><a href="#notes">Notes</a></nav>
+    <p class="foot-note">Figures arrive from third-party feeds, displayed untouched. Nothing found here counts as advice.</p>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>
